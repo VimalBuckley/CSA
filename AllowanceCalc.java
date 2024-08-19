@@ -1,4 +1,6 @@
-public class ItsYourTurnOneOneTwo {
+
+
+public class AllowanceCalc {
     public static void main(String[] args) {
         System.out.println(new Child("Gina", 16));
         System.out.println(new Child("Carl", 13));
