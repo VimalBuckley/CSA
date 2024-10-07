@@ -5,14 +5,14 @@ public class CompoundOperators {
         double myYears = 11.5;
         double bobYears = 10.5;
         double aliceYears = 9.5;
-        double dylanYears = 12.5;
+        double lucasYears = 12.5;
         totalYears += myYears;
         numPeople++;
         totalYears += bobYears;
         numPeople++;
         totalYears += aliceYears;
         numPeople++;
-        totalYears += dylanYears;
+        totalYears += lucasYears;
         numPeople++;
 
         double gradYear = 13;
@@ -20,7 +20,7 @@ public class CompoundOperators {
         System.out.println("I have "+ myYears + " years in school. Years until I graduate: " + (gradYear - myYears));
         System.out.println("Bob has "+ bobYears + " years in school. Years until Bob graduates: " + (gradYear - bobYears));
         System.out.println("Alice has "+ aliceYears + " years in school. Years until Alice graduates: " + (gradYear - aliceYears));
-        System.out.println("Dylan has "+ dylanYears + " years in school. Years until Dylan graduates: " + (gradYear - dylanYears));
+        System.out.println("lucas has "+ lucasYears + " years in school. Years until lucas graduates: " + (gradYear - lucasYears));
         System.out.println("Total people: " + numPeople + ", total years: " + totalYears);
         System.out.println("We have been in school for an average of " + totalYears / 4 + " years.");
         System.out.println("We have spent " + totalYears * 180 + " days in school.");

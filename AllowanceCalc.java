@@ -7,8 +7,8 @@ public class AllowanceCalc {
         System.out.println(new Child("Jennifer", 3));
     }
     public static class Child {
-        private String name;
-        private int age;
+        private final String name;
+        private final int age;
         public Child(String name, int age) {
             this.name = name;
             this.age = age;

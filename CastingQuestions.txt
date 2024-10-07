@@ -5,6 +5,12 @@ What is the purpose of widening/narrowing and what are the ways to do it?
 How does (int) (x + 0.5) round positive numbers?
 - The distance between integers is 1. When you round to an integer, you round to the closet one, which must be 0.5 or less away.
 - By adding 0.5, you make sure that the part of the number to the left of the decimal is whatever number you should round to.
+- double x = 0.6;
+- int roundedX = (int) (x + 0.5);
+- Now roundedX is equal to 1, because (x + 0.5) returns 1.1, which when cast to an int equals 1
 Would (int) (x - 0.5) round negative numbers?
 - Yes, because if a number is within 0.5 of the next smallest negative integer, subtracting 0.5 would make the part of the number
 - that is to the left of the decimal equal the number you should round to.
+- double x = -0.6;
+- int roundedX = (int) (x - 0.5);
+- Now roundedX is equal to -1, because (x - 0.5) returns -1.1, which when cast to an int equals -1

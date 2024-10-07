@@ -13,7 +13,7 @@ public class NumberRiddle {
         System.out.println("Then we half you number, and get: " + input + ".");
         input -= ogInput;
         System.out.print("Finally we subtract your original number: " + ogInput);
-        System.out.println(" to get: " + input + "!");
+        System.out.println(" to get: " + (double) input + "!");
         System.out.print("What a shocker!");
     }
 }
