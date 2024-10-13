@@ -7,26 +7,56 @@ public class YourChoice {
     public static void main(String[] args) {
         System.out.print("\033[H\033[2J");  
         System.out.flush();  
-        System.out.println("You were kidnapped. Escape the maze to survive!");
-        new Choice(
-            "Test"
+
+        makeChoice(
+            "You wake up. You realize there are zombies. Do you leave your house or go back to sleep?"
         ).addPath(
-            "Choice 1",
-            new End("End 1")
+            "SLEEP",
+            makeEnding("Your house fell down, but you were asleep :( You died")
         ).addPath(
-            "Choice 2",
-            new Choice(
-                "Test 2"
+            "LEAVE", 
+            makeChoice(
+                "Do you go to school or the police station. Or the sky"
             ).addPath(
-                "Choice 3",
-                new End("End 2")
-            )  
-        ).run();
+                "SKY",
+                makeEnding("You've gained omnipotence. Good job")
+            ).addPath(
+                "POLICE STATION",
+                makeEnding("A t-rex fell on you :( You died")
+            ).addPath(
+                "SCHOOL", 
+                makeChoice(
+                    "Do you do your homework for school?"
+                ).addPath(
+                    "YES", 
+                    makeEnding(
+                        "While you were focused on your homework, a zombie snuck up on you and bit you :( You died"
+                    )
+                ).addPath(
+                    "NO", 
+                    makeEnding(
+                        "You notice a zombie sneaking up on you and are able to escape. Then all the zombies disappear. You win :)"
+                    )
+                )
+            )
+        ).continueStory();
     }
 
-    public static class Choice implements Runnable {
+    public static Choice makeChoice(String prompt) {
+        return new Choice(prompt);
+    }
+
+    public static End makeEnding(String message) {
+        return new End(message);
+    }
+
+    public static interface Node {
+        public void continueStory();
+    }
+
+    public static class Choice implements Node {
         private String prompt;
-        private HashMap<String, Runnable> answerMap;
+        private HashMap<String, Node> answerMap;
 
         public Choice(String prompt) {
             this.prompt = prompt;
@@ -34,29 +64,28 @@ public class YourChoice {
             answerMap.put("QUIT", new End("You quit :("));
         }
 
-        public Choice addPath(String answer, Runnable next) {
+        public Choice addPath(String answer, Node next) {
             answerMap.put(answer, next);
             return this;
         }
 
         @Override
-        public void run() {
+        public void continueStory() {
             System.out.println();
             System.out.println(prompt);
             System.out.println("Choices: " + answerMap.keySet());
-            String answer = scanner.nextLine();
+            String answer = scanner.nextLine().toUpperCase();
             while (!answerMap.keySet().contains(answer)) {
                 System.out.println("That is not a valid choice!");
                 System.out.println("\n" + prompt);
                 System.out.println("Choices: " + answerMap.keySet());
                 answer = scanner.nextLine();
             }
-            answerMap.get(answer).run();
+            answerMap.get(answer).continueStory();
         }
-
     }
 
-    public static class End implements Runnable {
+    public static class End implements Node {
         private String message;
 
         public End(String message) {
@@ -64,11 +93,10 @@ public class YourChoice {
         }
 
         @Override
-        public void run() {
+        public void continueStory() {
             System.out.println();
             System.out.println(message);
             System.out.println("Story Over!");
         }
-
     }
 }
